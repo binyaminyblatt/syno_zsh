@@ -1,0 +1,66 @@
+#compdef synoacltool
+
+_synoacltool() {
+  local -a commands acl_entries acl_archive_options acl_perms
+
+  commands=(
+    '-h[Show help]'
+    '-check[Check ACL permission of a file]:path:_files'
+    '-get[Get Syno ACL of a file]:path:_files'
+    '-getace[Get Syno ACEs with uid/gid of a file]:path:_files'
+    '-get-perm[Extract Windows or Linux permissions]:path:_files:username'
+    '-add[Add Syno ACE to a file]:path:_files:acl entry'
+    '-addace[Add Syno ACEs with uid/gid to a file]:path:_files:acl entry'
+    '-replace[Replace specified ACE by index number]:path:_files:acl entry index:acl entry'
+    '-del[Delete Syno ACL of a file]:path:_files'
+    '-get-archive[Get ACL archive bit]:path:_files'
+    '-set-archive[Set ACL archive bit]:path:_files:archive option:((inherit single))'
+    '-del-archive[Delete ACL archive bit]:path:_files:archive option:((inherit single))'
+    '-copy[Copy ACL from source to destination]:source:_files destination:_files'
+    '-set-owner[Set owner of a file]:path:_files:(user group):name'
+    '-set-eadir-acl[Set ACL for EA dir]:path:_files'
+    '-enforce-inherit[Enforce ACL inheritance]:path:_files'
+    '-stat[Get file stat]:path:_files'
+    '-cstat[Get file stat]:path:_files'
+    '-lstat[Get file stat]:path:_files'
+    '-fstat[Get file stat]:path:_files'
+    '-utime[Set current time into file]:path:_files'
+  )
+
+  acl_entries=(
+    'user:User ACE'
+    'group:Group ACE'
+    'owner:Owner ACE'
+    'everyone:Everyone ACE'
+    'authenticated_user:Authenticated user ACE'
+    'system:System ACE'
+  )
+
+  acl_perms=(
+    'r:(r)ead data'
+    'w:(w)rite data (create file)'
+    'x:e(x)ecute'
+    'p:a(p)pend data (create dir)'
+    'd:(d)elete'
+    'D:(D)elete child (only for dir)'
+    'a:read (a)ttribute'
+    'A:write (A)ttribute'
+    'R:(R)ead xattr'
+    'W:(W)rite xattr'
+    'c:read a(c)l'
+    'C:write a(c)l'
+    'o:get (o)wnership'
+  )
+
+  acl_archive_options=(
+    'is_inherit[Inherit ACL]'
+    'is_read_only[Read-only]'
+    'is_owner_group[Owner group]'
+    'has_ACL[Has ACL]'
+    'is_support_ACL[Support ACL]'
+  )
+
+  _arguments -s $commands
+}
+
+_synoacltool

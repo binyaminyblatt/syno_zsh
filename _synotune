@@ -1,0 +1,24 @@
+#compdef synotune
+
+_synotune() {
+  local -a profiles
+  profiles=(
+    'performance_throughput:Optimize for performance throughput'
+    'performance_latency:Optimize for performance latency'
+  )
+
+  _arguments \
+    '--get[Get current profile]' \
+    '--set'[Set profile]:profile'(${profiles[@]})' \
+    '--run[Run current profile]' \
+    '--list[List all profiles]' \
+    '--pin-btrfs-metadata[Pin Btrfs metadata for SSD cache]:mount_path' \
+    '--unpin-btrfs-metadata[Unpin Btrfs metadata for SSD cache]:mount_path' \
+    '--btrfs-metadata-rescan[Rescan Btrfs metadata for SSD cache]:mount_path' \
+    '--btrfs-metadata-cache-status[Btrfs metadata cache status]:mount_path' \
+    '--btrfs-metadata-cache-check-support[Btrfs metadata cache check support]:mount_path' \
+    '--btrfs-metadata-cache-force-stop[Btrfs metadata cache force stop]:mount_path' \
+    '--usage[Show help]'
+}
+
+_synotune

@@ -1,0 +1,74 @@
+#compdef synopkg
+
+_synopkg() {
+  local -a subcommands
+
+  subcommands=(
+    'start:Start a package:package'
+    'stop:Stop a package:package'
+    'restart[--service]:Restart one package or one or more services:package|service'
+    'resume:Start a package without changing its systemd enable status:package'
+    'pause:Stop a package without changing its systemd enable status:package'
+    'start-depend:Start all packages that depend on a specific service:service'
+    'stop-depend:Stop all packages that depend on a specific service:service'
+    'onoffall:Start or stop all the packages:start|stop'
+    'install:Install a package through local spk:.spk file'
+    'install_from_server:Install a package from the server:package [volume] [user] [beta]'
+    'uninstall:Uninstall one or more packages:package...'
+    'upgradeall:Upgrade all upgradable packages:[limitonly] [lang] [user]'
+    'chkupgradepkg:Find upgradable packages from server, decide to upgrade:[lang]'
+    'checkupdateall:Check for upgradable packages from server:[lang] [user]'
+    'status:Get the status of an installed package:package'
+    'is_onoff:Check if a package is installed and active:package'
+    'version:Get the version of an installed package:package'
+    'query:Get basic information about a package from an spk:.spk file'
+    'list:List installed packages:[--name] [--depend-on <package>]'
+    'checkupdate:Check if a package is updatable:package [lang]'
+    'show:Show package details:[--beta] [--lang <lang>] package'
+    'showall:Show details for all packages:[--beta] [--no-filter] [--lang <lang>]'
+  )
+
+  _arguments \
+    '1:command:->command' \
+    '*::arguments:->args'
+
+  case $state in
+    command)
+      _describe 'synopkg commands' subcommands
+      ;;
+    args)
+      case $words[1] in
+        start|stop|resume|pause|status|is_onoff|version|uninstall|show)
+          _packages
+          ;;
+        install_from_server)
+          _packages
+          _values 'optional arguments' 'volume' 'user' 'beta'
+          ;;
+        upgradeall|chkupgradepkg|checkupdateall|checkupdate)
+          _values 'optional arguments' 'limitonly' 'lang' 'user'
+          ;;
+        onoffall)
+          _values 'start or stop' 'start' 'stop'
+          ;;
+        list)
+          _values 'optional arguments' '--name' '--depend-on'
+          ;;
+        showall)
+          _values 'optional arguments' '--beta' '--no-filter' '--lang'
+          ;;
+        restart)
+          _values '--service'
+          _packages
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_packages() {
+  # Stub for package list completion. You can replace this function with a command that retrieves installed packages.
+  _values 'packages' package1 package2 package3
+}
+
+_synopkg

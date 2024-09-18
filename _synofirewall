@@ -1,0 +1,77 @@
+#compdef synofirewall
+
+_synofirewall() {
+  local -a actions
+
+  actions=(
+    '--help:Show help'
+    '--enable:Enable firewall'
+    '--disable:Disable firewall'
+    '--reload:Reload firewall'
+    '--update:Update firewall configuration'
+    '--enum[IPV4|IPV6]:Enumerate firewall iptables rules:IPV4|IPV6'
+    '--enum-adapter:Enumerate firewall adapter'
+    '--profile-list:List all firewall profiles'
+    '--profile-set[Profile name]:Set running profile without reloading firewall:profile name'
+    '--insert-test:Insert test rule (for testing)'
+    '--service[List services by keyword]:List service name & port mapping:service_keyword'
+    '--change-adapter[Old adapter] [New adapter]:Change firewall adapter:old adapter new adapter'
+    '--change-security-adapter[Old adapter] [New adapter]:Change firewall security adapter:old adapter new adapter'
+    '--serv-block[Interface] [Service name]:Check if firewall blocks a service:interface service name'
+    '--info:Show firewall information'
+    '--export:Export firewall configuration'
+    '--import[Config file]:Import firewall configuration:CONFIG'
+  )
+
+  _arguments -s \
+    '1:action:->actions' \
+    '*::options:->options'
+
+  case $state in
+    actions)
+      _describe 'synofirewall actions' actions
+      ;;
+    options)
+      case $words[1] in
+        --enum)
+          _values 'IP version' IPV4 IPV6
+          ;;
+        --profile-set)
+          _profiles
+          ;;
+        --change-adapter|--change-security-adapter)
+          _adapters
+          ;;
+        --serv-block)
+          _interfaces
+          _services
+          ;;
+        --import)
+          _files
+          ;;
+      esac
+      ;;
+  esac
+}
+
+# Placeholder function to complete firewall profiles
+_profiles() {
+  _values 'firewall profiles' profile1 profile2 profile3
+}
+
+# Placeholder function to complete network adapters
+_adapters() {
+  _values 'network adapters' eth0 eth1 wlan0
+}
+
+# Placeholder function to complete network interfaces
+_interfaces() {
+  _values 'network interfaces' eth0 eth1 wlan0
+}
+
+# Placeholder function to complete services
+_services() {
+  _values 'services' http https ftp ssh
+}
+
+_synofirewall

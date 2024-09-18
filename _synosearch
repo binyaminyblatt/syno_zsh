@@ -1,0 +1,37 @@
+#compdef synosearch
+
+_synosearch() {
+  local -a types langs
+
+  types=(
+    'app:Search for applications'
+    'help:Search in help documentation'
+    'helptip:Search in help tips'
+  )
+
+  langs=(
+    'enu:English'
+    'cht:Traditional Chinese'
+    'chs:Simplified Chinese'
+    'csy:Czech'
+    'jpn:Japanese'
+    'krn:Korean'
+    'fre:French'
+    'ger:German'
+    'ita:Italian'
+    'nld:Dutch'
+    'plk:Polish'
+    'rus:Russian'
+    'spn:Spanish'
+  )
+
+  _arguments -s \
+    '--type=[Search type]:type:((app help helptip))' \
+    '--lang=[Language]:language:((enu cht chs csy jpn krn fre ger ita nld plk rus spn))' \
+    '--query=[Search query]:query' \
+    '--offset=[Result offset]:offset' \
+    '--size=[Number of results to return]:size' \
+    '--help[Show help message]'
+}
+
+_synosearch

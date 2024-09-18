@@ -1,0 +1,39 @@
+#compdef synoselfcheck-min
+
+_synoselfcheck_min() {
+  local -a options
+
+  options=(
+    '-r[Correct errors]'
+    '-h[Verify files checksum]'
+    '-H[Skip checking files checksum]'
+    '-t[Test mode]'
+    '-o[Specify log file name]:log file:_files'
+  )
+
+  _arguments -s \
+    $options \
+    '1:project_name:->projects' \
+    '2:check_suite:->suites'
+
+  case $state in
+    projects)
+      _projects
+      ;;
+    suites)
+      _suites
+      ;;
+  esac
+}
+
+# Placeholder function to complete project names
+_projects() {
+  _values 'project_name' project1 project2 project3
+}
+
+# Placeholder function to complete check suites
+_suites() {
+  _values 'check_suite' suite1 suite2 suite3
+}
+
+_synoselfcheck_min

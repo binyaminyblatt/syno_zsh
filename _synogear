@@ -1,0 +1,39 @@
+#compdef synogear
+
+_synogear() {
+  _arguments \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _values 'command' \
+        'install[Get and run this package, also load all tools]' \
+        'remove[Remove it]' \
+        'help[Show this usage]' \
+        'list[List all tools]' \
+        'check[Check if tools are ready to use]'
+      ;;
+    args)
+      case $words[1] in
+        install)
+          # No additional arguments for install
+          ;;
+        remove)
+          # No additional arguments for remove
+          ;;
+        list)
+          # No additional arguments for list
+          ;;
+        check)
+          # No additional arguments for check
+          ;;
+        help)
+          # No additional arguments for help
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_synogear

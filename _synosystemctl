@@ -1,0 +1,88 @@
+#compdef synosystemctl
+
+_synosystemctl() {
+  local -a commands
+
+  commands=(
+    'start[--no-block]:Start one or more units:unit'
+    'stop[--no-block]:Stop one or more units:unit'
+    'enable:Enable one or more unit files:unit'
+    'disable:Disable one or more unit files:unit'
+    'restart[--no-block]:Restart one or more units:unit'
+    'try-restart[--no-block]:Restart one or more units if active:unit'
+    'reload[--no-block]:Reload one or more units:unit'
+    'reload-or-restart[--no-block]:Reload or restart one or more units:unit'
+    'reenable:Reenable one or more unit files:unit'
+    'isolate[--no-block]:Start one unit and stop all others:unit'
+    'mask[--runtime]:Mask one or more units:unit'
+    'unmask[--runtime]:Unmask one or more units:unit'
+    'uninstall:Remove units from the system:unit'
+    'daemon-reload:Reload unit config'
+    'get-default:Get the name of the default target'
+    'set-default:Set the default target:unit'
+    'get-enable-status:Get the enable status of a given unit:unit'
+    'get-active-status:Get the active status of a given unit:unit'
+    'get-load-status:Get the load status of a given unit:unit'
+    'stop-service-by-reason:Stop services by a reason:reason unit'
+    'start-service-by-reason:Start services by a reason:reason unit'
+    'remove-service-reason:Remove reason for services:reason unit'
+    'list-service-reason:List service reason:unit'
+    'get-unit-by-pid:Get the unit name associated with a PID:PID'
+    'list-service-by-mnt-path:List services using a mount path:PATH'
+    'register-volume:Register a volume for a unit:unit volume'
+    'package-register-volume:Register a volume for a package:package volume'
+    'unregister-volume:Unregister a volume for a unit:unit volume'
+    'package-unregister-volume:Unregister a volume for a package:package volume'
+  )
+
+  _arguments -s \
+    '1:command:->commands' \
+    '*::arguments:->args'
+
+  case $state in
+    commands)
+      _describe 'synosystemctl commands' commands
+      ;;
+    args)
+      case $words[1] in
+        start|stop|restart|try-restart|reload|reload-or-restart|isolate)
+          _units
+          ;;
+        enable|disable|reenable|mask|unmask|uninstall|get-enable-status|get-active-status|get-load-status|set-default)
+          _units
+          ;;
+        stop-service-by-reason|start-service-by-reason|remove-service-reason)
+          _describe 'reason' reason1 reason2 reason3
+          _units
+          ;;
+        register-volume|unregister-volume|package-register-volume|package-unregister-volume)
+          _units
+          _volumes
+          ;;
+        list-service-by-mnt-path)
+          _files
+          ;;
+        get-unit-by-pid)
+          _pids
+          ;;
+      esac
+      ;;
+  esac
+}
+
+# Placeholder function for units completion
+_units() {
+  _values 'units' unit1 unit2 unit3
+}
+
+# Placeholder function for volumes completion
+_volumes() {
+  _values 'volumes' volume1 volume2 volume3
+}
+
+# Placeholder function for PIDs completion
+_pids() {
+  _values 'PIDs' 1234 5678 91011
+}
+
+_synosystemctl

@@ -1,0 +1,37 @@
+#compdef synoautoblock
+
+_synoautoblock() {
+  _arguments \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _values 'command' \
+        'attempt[Attempt to block an IP for a specific service]' \
+        'deny[Deny an IP]' \
+        'reset[Reset block status for an IP]' \
+        'in-white-list[Check if an IP is in the whitelist]'
+      ;;
+    args)
+      case $words[1] in
+        attempt)
+          _arguments \
+            '1:ip address:' \
+            '2:service name:'
+          ;;
+        deny)
+          _arguments '1:ip address:'
+          ;;
+        reset)
+          _arguments '1:ip address:'
+          ;;
+        in-white-list)
+          _arguments '1:ip address:'
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_synoautoblock

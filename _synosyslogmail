@@ -1,0 +1,50 @@
+#compdef synosyslogmail
+
+_synosyslogmail() {
+  local -a mailtypes shares severities keywords
+
+  mailtypes=(
+    'SHARE_REMOVE:Send notification for share removal'
+    'SHARE_RENAME:Send notification for share rename'
+    'SHARE_ENCMNT:Send notification for share encryption mount'
+    'SHARE_ENCUNMNT:Send notification for share encryption unmount'
+    'SEVERITY:Send notification based on severity level'
+    'KEYWORD:Send notification based on keyword'
+  )
+
+  shares=(
+    'share1'
+    'share2'
+    'share3'
+  )
+
+  severities=(
+    'LOW'
+    'MEDIUM'
+    'HIGH'
+  )
+
+  keywords=(
+    'keyword1'
+    'keyword2'
+    'keyword3'
+  )
+
+  _arguments -s \
+    '--mailtype=[Type of notification mail]:mailtype:((SHARE_REMOVE SHARE_RENAME SHARE_ENCMNT SHARE_ENCUNMNT SEVERITY KEYWORD))' \
+    '--share=[Shared folder]:shared folder:->shares' \
+    '--severity=[Severity level]:severity:((LOW MEDIUM HIGH))' \
+    '--content=[Content of the notification]' \
+    '--keyword=[Keyword for notification]:keyword:->keywords'
+
+  case $state in
+    shares)
+      _values 'shared folder' $shares
+      ;;
+    keywords)
+      _values 'keywords' $keywords
+      ;;
+  esac
+}
+
+_synosyslogmail

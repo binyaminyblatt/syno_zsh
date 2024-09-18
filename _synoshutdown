@@ -1,0 +1,18 @@
+#compdef synoshutdown
+
+_synoshutdown() {
+  local -a options
+
+  options=(
+    '--help[Show help message]'
+    '--shutdown[Properly shutdown system]'
+    '--reboot[Reboot system]'
+    '-h[Show help message]'
+    '-s[Properly shutdown system]'
+    '-r[Reboot system]'
+  )
+
+  _arguments -s $options
+}
+
+_synoshutdown

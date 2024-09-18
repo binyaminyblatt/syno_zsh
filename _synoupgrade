@@ -1,0 +1,30 @@
+#compdef synoupgrade
+
+_synoupgrade() {
+  local -a options
+
+  options=(
+    '--check:Check for available upgrades'
+    '--start-force:Force start the upgrade process'
+    '--start-with-extracted-patch[Absolute extracted patch path]:ABSOLUTE_EXTRACTED_PATH'
+    '--patch[Absolute upgrade file path]:ABSOLUTE_UPGRADE_FILE_PATH'
+    '--autoupdate[Optional, enable autoupdate (default=1)]:1'
+    '--autoupdate-shutdown:Shutdown system after autoupdate'
+    '--check-pat[Check specified upgrade file]:ABSOLUTE_UPGRADE_FILE_PATH'
+    '--migration-check-pat[Check specified migration file]:ABSOLUTE_UPGRADE_FILE_PATH'
+    '--prepare-upgrade-files-to-root:Prepare upgrade files to the root'
+    '--prepare-smallupdate-downloaded-info[Prepare small update downloaded info]:ABSOLUTE_PATH_FOR_PREPARATION'
+    '--get-smallupdate-install-files-path:Get path for small update installation files'
+    '--ensure-settings:Ensure settings are applied'
+    '--get-smallupdate-info:Get info for the small update'
+    '--get-dsmupdate-space-requirement:Get space requirement for DSM update'
+    '--get-smallupdate-space-requirement:Get space requirement for small update'
+    '--fire-post-hook[Specify upgrade type]:UPGRADE_TYPE'
+    '--upload-patch[Upload the specified patch file]:ABSOLUTE_UPGRADE_FILE_PATH'
+    '--summarize-update-info[Summarize update info]:UPDATE_INFO_VERSION_PART'
+  )
+
+  _arguments -s $options
+}
+
+_synoupgrade

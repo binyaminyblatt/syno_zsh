@@ -1,0 +1,45 @@
+#compdef synoscgi
+
+_synoscgi() {
+  local -a options_scgi
+  local -a options_apid
+
+  # Define main options
+  options_main=(
+    '--help:Display help'
+    '--mode[Select mode:]:scgi\:Run as synoscgi apid\:Run as synoapid'
+  )
+
+  # Define SCGI specific options
+  options_scgi=(
+    '--idle-child[Max idle child number (optional)]:childNumber: '
+    '--max-child[Max child number (optional)]:childNumber: '
+  )
+
+  # Define APID specific options
+  options_apid=(
+    '--conf[Specify the apid config realpath (required)]::config'
+  )
+
+  _arguments -s \
+    '1:mode:->modes' \
+    '*::options:->options'
+
+  case $state in
+    modes)
+      _values 'mode' scgi apid
+      ;;
+    options)
+      case $words[2] in
+        scgi)
+          _describe 'scgi options' options_scgi
+          ;;
+        apid)
+          _describe 'apid options' options_apid
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_synoscgi

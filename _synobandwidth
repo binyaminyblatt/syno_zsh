@@ -1,0 +1,82 @@
+#compdef synobandwidth
+
+_synobandwidth() {
+  _arguments \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _values 'command' \
+        'status[Show bandwidth status]' \
+        'get-global-conf[Get global configuration]' \
+        'set-global-conf[Set global configuration]' \
+        'get-user-conf[Get user configuration]' \
+        'set-user-conf[Set user configuration]' \
+        'get-group-conf[Get group configuration]' \
+        'set-group-conf[Set group configuration]' \
+        'preview[Preview configuration]' \
+        'simulate[Simulate bandwidth usage]' \
+        'help[Show help message]'
+      ;;
+    args)
+      case $words[1] in
+        status)
+          _arguments \
+            '1:list:(user group all)' \
+            '2:transfer:(upload download all)' \
+            '3:merge:(0 1)' \
+            ;;
+        get-global-conf)
+          _arguments \
+            '1:protocol:(filestation webdav ftp rsync all)' \
+            ;;
+        set-global-conf)
+          _arguments \
+            '1:state:(enabled disabled)' \
+            '2:protocol:(filestation webdav ftp rsync all)' \
+            '3:user_group:(user_only group_only user_first group_first min max sum)' \
+            '4:inter_group:(min max sum)' \
+            '5:occupy:(none all min max weighted)' \
+            ;;
+        get-user-conf)
+          _arguments \
+            '1:username:' \
+            ;;
+        set-user-conf)
+          _arguments \
+            '1:username:' \
+            '2:state:(enabled disabled)' \
+            '3:protocol:(filestation webdav ftp rsync all)' \
+            '4:download_rate:' \
+            '5:upload_rate:' \
+            ;;
+        get-group-conf)
+          _arguments \
+            '1:groupname:' \
+            ;;
+        set-group-conf)
+          _arguments \
+            '1:groupname:' \
+            '2:state:(enabled disabled)' \
+            '3:protocol:(filestation webdav ftp rsync all)' \
+            '4:download_rate:' \
+            '5:upload_rate:' \
+            ;;
+        preview)
+          _arguments \
+            '1:username:' \
+            ;;
+        simulate)
+          _arguments \
+            '1:user:(user1 user2 user3 ...)' \
+            '2:conn:(1 x)' \
+            '3:protocol:(filestation webdav ftp rsync all)' \
+            '4:transfer:(upload download all)' \
+            ;;
+      esac
+      ;;
+  esac
+}
+
+_synobandwidth

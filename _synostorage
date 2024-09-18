@@ -1,0 +1,23 @@
+#compdef synostorage
+
+_synostorage() {
+  local -a options
+
+  options=(
+    '--help[Show this help message]'
+    '--hotspare[Manage hotspare]'
+    '--mail[Mail notification]'
+    '--lock[Lock management]'
+    '--vol-mounted[Volume mount hook]'
+    '--vol-unmounting[Volume unmount hook]'
+    '--vol-set-mount-point[Set volume mount point into sysfs]'
+    '--notify-idle-drive[Detect idle drives and send notification per drive]'
+    '--notify-drive-bundle-update[Detect bundle drives and check for updates]'
+    '--notify-fsck-skipped[Detect notification for fsck skip this boot progress]'
+    '--upgrade-space-busy-hard-check[Check if any space is busy and need to block DSM upgrade]'
+  )
+
+  _arguments -s $options
+}
+
+_synostorage

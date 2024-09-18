@@ -1,0 +1,54 @@
+#compdef synonet
+
+_synonet() {
+  local -a commands
+
+  commands=(
+    '--help[Show help message]'
+    '--show[Show network configuration]'
+    '--dhcp[Enable DHCP on interface]:interface'
+    '--manual[Set static IP on interface]:interface:ip mask'
+    '--check[Check IP address]:ip:mask'
+    '--la_new[Create new bond]:bond interface'
+    '--la_del[Delete bond]:bond'
+    '--la_enum[Enumerate bonds]'
+    '--la_get[Get bond details]:bond'
+    '--la_exist[Check if bond exists]'
+    '--set_gateway[Set gateway]:gateway'
+    '--set_dns[Set DNS server]:dns'
+    '--dns_update[Update DNS settings]'
+    '--set_mtu[Set MTU on interface]:interface:MTU'
+    '--set_hostname[Set new hostname]:new hostname'
+    '--get_hostname[Get current hostname]'
+    '--vlan_enum[Enumerate VLANs]'
+    '--vlan_create[Create VLAN]:device vlan_id {dhcp|ip mask}'
+    '--vlan_remove[Remove VLAN]:vlan interface'
+    '--vlan_exist[Check if VLAN exists]'
+    '--set_pppoe[Set PPPoE on interface]:interface username password'
+    '--get_if[Get PPPoE interface]:pppoe'
+    '--pppoe_create[Create PPPoE]:port_id username password'
+    '--pppoe_check_status[Check PPPoE status]:service_id'
+    '--pppoe_start_all[Start all PPPoE services]'
+    '--pppoe_stop_all[Stop all PPPoE services]'
+    '--pppoe_start_byport[Start PPPoE by port]'
+    '--pppoe_stop_byport[Stop PPPoE by port]'
+    '--pppoe_change_interface[Change PPPoE interface]:old_if new_if'
+    '--pppoe_get_base_interface[Get base interface]:ifname'
+    '--wake[Wake on LAN]:MAC address interface'
+    '--get_block[Get block status]:interface'
+    '--set_block[Set block status]:interface {ha|aha|virtualization|mailplus} {true|false}'
+    '--dhcp_server_change_interface[Change DHCP server interface]:old_interface new_interface'
+    '--get_mac_addr[Get MAC address]:interface {original|ha}'
+    '--set_ip[Set IP address]:{-4|-6} interface {flush|add|del} {empty|ip/prefix_len}'
+    '--ipv6_init[Initialize IPv6]'
+    '--ip_alias_list[Show IP aliases]:interface'
+    '--ip_alias_add[Add IP alias]:interface ip/prefix_len'
+    '--ip_alias_delete[Delete IP alias]:ip'
+    '--ip_alias_apply[Apply IP alias]:[ifname [subnet]]'
+    '--ip_alias_unapply[Unapply IP alias]:[ifname [subnet]]'
+  )
+
+  _arguments -s $commands
+}
+
+_synonet

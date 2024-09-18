@@ -1,0 +1,44 @@
+#compdef synoshare
+
+_synoshare() {
+  local -a commands
+
+  commands=(
+    '--help[Show this help message]'
+    '--build[Build share configurations]'
+    '--get[Get share details]:share name'
+    '--get_by_attr[Get share by attribute]:path:attribute'
+    '--enc_mount[Mount encrypted share]:share name password'
+    '--enc_unmount[Unmount encrypted shares]:share names'
+    '--enum[List shares by type]:{ALL,LOCAL,USB,SATA,ENC,DEC,GLUSTER,C2,COLD-STORAGE,MISSING-VOL,OFFLINE-VOL,CEPH,WORM}+'
+    '--enumpre[List shares by prefix]:{ALL,LOCAL,USB,SATA,ENC,DEC,C2,CEPH}+ prefix case-insensitive{0|1}'
+    '--enummnt[List mounted shares]:mount path'
+    '--del[Delete shares]:{TRUE|FALSE} share names'
+    '--add[Add a new share]:share name description path na rw ro browsable{0|1} adv_privilege{0~7}'
+    '--rename[Rename a share]:old share name new share name'
+    '--setdesc[Set share description]:share name description'
+    '--setvol[Set share volume]:share name volume id'
+    '--setbrowse[Set share browse flag]:share name browse flag{0|1}'
+    '--setmissing[Set share missing flag]:share name missing flag{0|1}'
+    '--is_missing[Check if share is missing]:share name'
+    '--setoffline[Set share offline flag]:share name offline flag{0|1}'
+    '--is_offline[Check if share is offline]:share name'
+    '--setuser[Set user access for share]:share name user_auth{NA|RO|RW} operator{+|-|=} user names'
+    '--getmap[Get share map]:share name'
+    '--is_accessible[Check share accessibility]:share name'
+    '--dbopen2[Open share database]:share name'
+    '--list_acl[List ACL for share]:share name'
+    '--list_reserved_name[List reserved names]'
+    '--set_share_default_acl[Set default ACL for share]:share name'
+    '--worm-get[Get WORM status]:<share name|file path|dir path>'
+    '--worm-set[Set WORM status]:<share name> <mode: X|E|C> <def-lock: X|M|I|A> <wait-time in sec> <def-duration in sec>'
+    '--worm-lock[Lock file or directory]:<file path|dir path> <mode: X|I|A> <from: X|N|B|E> <duration in sec>'
+    '--get-real-path[Get real path of share]:share name'
+    '--tiering-get[Get tiering status]:share name'
+    '--tiering-set[Set tiering status]:share name status{0|1}'
+  )
+
+  _arguments -s $commands
+}
+
+_synoshare

@@ -1,0 +1,19 @@
+#compdef synopartition
+
+_synopartition() {
+  local -a commands
+
+  commands=(
+    '--help[Show help message]'
+    '--list[List the partition layout table]'
+    '--check[Check the partition layout version]:disk path'
+    '--remove[Remove specific partition of disk]:disk path:partition number'
+    '--part[Partition the disk with specific layout]:disk path:index_of_list {logical_size_GB ... 0}'
+    '--scan-syno-part[Scan all disk partitions which match Synology partition layout]'
+    '--log[Log start offset and size for every partition]:disk path'
+  )
+
+  _arguments -s $commands
+}
+
+_synopartition

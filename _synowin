@@ -1,0 +1,22 @@
+#compdef synowin
+
+_synowin() {
+  local -a commands
+
+  commands=(
+    '-getWins[Get the WINS server]'
+    '-getWorkgroup[Get the current workgroup]'
+    '-setWins[Set the WINS server]:wins server'
+    '-setWGP[Set the workgroup]:workgroup'
+    '-joinWorkgroup[Join a workgroup]:workgroup'
+    '-joinDomain[Join a domain]:{Short_Domain_Name|Long_Domain_Name}:username:password:((-d "DNS IP") (-i "KDC IP") (-n "NetBios Name") (-f "FQDN Name"))'
+    '-checkwins[Check WINS configuration]'
+    '-updateDomain[Update the domain settings]'
+    '-rebuildDB[Rebuild the database]:{user|group}'
+    '-checkDNSHostConflict[Check for DNS host conflict]:realm'
+  )
+
+  _arguments -s $commands
+}
+
+_synowin

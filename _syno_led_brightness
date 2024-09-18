@@ -1,0 +1,38 @@
+#compdef syno_led_brightness
+
+_syno_led_brightness() {
+  _arguments \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _values 'command' \
+        'get[Get current brightness of LED]' \
+        'set[Set current brightness of LED]' \
+        'get_config[Get configuration]' \
+        'set_config[Set configuration]' \
+        'update[Update brightness according to configuration]' \
+        'static_data[Get min, max, and default value of LED brightness]' \
+        'help[Show help message]'
+      ;;
+    args)
+      case $words[1] in
+        set)
+          _arguments '1:brightness:'
+          ;;
+        set_config)
+          _arguments \
+            '1:brightness:' \
+            '2:schedule:'
+          ;;
+        update)
+          _arguments \
+            '--force[Force update brightness]'
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_syno_led_brightness

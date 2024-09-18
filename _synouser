@@ -1,0 +1,30 @@
+#compdef synouser
+
+_synouser() {
+  local -a commands
+
+  commands=(
+    '--help[Show this help message]'
+    '--rebuild[Rebuild user database]:{all,domain,ldap} Force{0|1}'
+    '--enum[List users by type]:{local,domain,ldap,all,domain_used}'
+    '--enumpre[List users by prefix]:{local,domain,all,domain_used} prefix case-insensitive{0|1}'
+    '--enumsub[List users by substring]:{local,domain,all,domain_used} substring case-insensitive{0|1}'
+    '--enum_admin[List admin users by type]:{local,domain,ldap,all}'
+    '--get[Get user details]:username'
+    '--getuid[Get username by UID]:UID'
+    '--add[Add a new user]:username password "full name" expired{0|1} email privilege'
+    '--modify[Modify user details]:username "full name" expired{0|1} email'
+    '--rename[Rename a user]:old username new username'
+    '--setpw[Set user password]:username new password'
+    '--del[Delete users]:username1 username2 ...'
+    '--login[Login with username and password]:username password'
+    '--dbopen2[Open user database]:username'
+    '--filesetpw[Set file passwords]'
+    '--create_homes[Create home directories for domain or LDAP users]:{domain,ldap}'
+    '--revoke_password_pending[Revoke pending password for user]:username'
+  )
+
+  _arguments -s $commands
+}
+
+_synouser

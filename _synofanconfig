@@ -1,0 +1,26 @@
+#compdef synofanconfig
+
+_synofanconfig() {
+  _arguments \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _values 'command' \
+        'parseXML[Parse XML file]' \
+        'help[Show help message]'
+      ;;
+    args)
+      case $words[1] in
+        parseXML)
+          _arguments \
+            '1:test_count:(' \
+            'test count)' \
+            ;;
+      esac
+      ;;
+  esac
+}
+
+_synofanconfig
